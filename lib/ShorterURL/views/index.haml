@@ -1,0 +1,25 @@
+%h1.title Tinyclone
+- unless @link.nil?
+    .success
+        %code= @link.url.original
+        has been shortened to
+        %a{:href => "/#{@link.identifier}"} = "http://localhost:4567/#{@link.identifier}"
+        %br
+        Go to
+        %a{:href => "/info/#{@link.identifier}"} = "http://localhost:4567/info/#{@link.identifier}"
+        to get more information about this link.
+- if env['sinatra.error']
+    .error= env['sinatra.error']
+%form{:method => 'post', :action => '/'}
+    Shorten this:
+    %input{:type => 'text', :name => 'original', :size => '70'}
+    %input{:type => 'submit', :value => 'now!'}
+    %br
+    to http://localhost:4567/
+    %input{:type => 'text', :name => 'custom', :size => '20'}
+    (optional)
+%p
+%small copyright &copy;
+%a{:href => 'http://blog.saush.com'}Chang Sau Sheong
+%p
+    %a{:href => 'http://github.com/sausheong/tinyclone'} Full source code
